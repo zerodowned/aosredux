@@ -2114,19 +2114,41 @@ namespace Server.Mobiles
 		{
 			if ( InsuranceEnabled && item.Insured )
 			{
+				// This section penalises red players an extra 1800 gold per item that is insured.
+				if ( this.Kills >= 5 )
+				{
+					if ( Banker.Withdraw( this, 1800 ) )
+					{
+						SendMessage("You have paid 1800 additional tax due to your murderer status");
+						if ( m_InsuranceAward is PlayerMobile )
+						{
+							Banker.Deposit( m_InsuranceAward, 1800 );
+							PlayerMobile pm = (PlayerMobile)m_InsuranceAward;
+							pm.SendMessage( "You have been awarded an extra 1800 gold for vanquishing a murdered" ); 
+						}
+					}
+					else
+					{
+					item.PayedInsurance = false;
+					item.Insured = false;
+					SendMessage( "You lack the funds to pay murderer tax and your item has dropped." );	
+					return false;
+					}
+				}
+				// Auto renewal occurs here and charges the person who died.  Occurs for each item.
 				if ( AutoRenewInsurance )
 				{
-					int cost = ( m_InsuranceAward == null ? 600 : 300 );
+				int cost = ( m_InsuranceAward == null ? 600 : 300 );	
 
 					if ( Banker.Withdraw( this, cost ) )
 					{
 						m_InsuranceCost += cost;
 						item.PayedInsurance = true;
-						SendLocalizedMessage(1060398, cost.ToString()); // ~1_AMOUNT~ gold has been withdrawn from your bank box.
+						SendLocalizedMessage(1060398, cost.ToString()); // ~1_AMOUNT~ gold has been 						withdrawn from your bank box.
 					}
 					else
 					{
-						SendLocalizedMessage( 1061079, "", 0x23 ); // You lack the funds to purchase the insurance
+						SendLocalizedMessage( 1061079, "", 0x23 ); // You lack the funds to 						purchase the insurance
 						item.PayedInsurance = false;
 						item.Insured = false;
 						m_NonAutoreinsuredItems++;
@@ -2138,6 +2160,7 @@ namespace Server.Mobiles
 					item.Insured = false;
 				}
 
+				// The killer is awarded gold for each item.
 				if ( m_InsuranceAward != null )
 				{
 					if ( Banker.Deposit( m_InsuranceAward, 300 ) )
@@ -2152,7 +2175,7 @@ namespace Server.Mobiles
 
 			return false;
 		}
-
+		
 		public override DeathMoveResult GetParentMoveResultFor( Item item )
 		{
 			if ( CheckInsuranceOnDeath( item ) )
