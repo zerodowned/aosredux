@@ -74,28 +74,28 @@ namespace Server.Items
 
 			if ( rnd < 1 )
 			{
-				attributeCount = Utility.RandomMinMax( 2, 6 );
-				min = 20; max = 70;
+				attributeCount = Utility.RandomMinMax( 3, 6 );
+				min = 50; max = 70;
 			}
 			else if ( rnd < 3 )
 			{
-				attributeCount = Utility.RandomMinMax( 2, 4 );
-				min = 20; max = 50;
+				attributeCount = Utility.RandomMinMax( 2, 5 );
+				min = 30; max = 50;
 			}
 			else if ( rnd < 6 )
 			{
-				attributeCount = Utility.RandomMinMax( 2, 3 );
+				attributeCount = Utility.RandomMinMax( 2, 4 );
 				min = 20; max = 40;
 			}
 			else if ( rnd < 10 )
 			{
-				attributeCount = Utility.RandomMinMax( 1, 2 );
-				min = 10; max = 30;
+				attributeCount = Utility.RandomMinMax( 1, 3 );
+				min = 20; max = 30;
 			}
 			else
 			{
 				attributeCount = 1;
-				min = 10; max = 20;
+				min = 15; max = 20;
 			}
 		}
 
@@ -132,7 +132,7 @@ namespace Server.Items
 				cont.LockLevel = cont.RequiredSkill - 10;
 				cont.MaxLockLevel = cont.RequiredSkill + 40;
 
-				cont.DropItem( new Gold( level * 1000 ) );
+				cont.DropItem( new Gold( level * 3000 ) );
 
 				for ( int i = 0; i < level * 5; ++i )
 					cont.DropItem( Loot.RandomScroll( 0, 63, SpellbookType.Regular ) );
