@@ -2124,7 +2124,7 @@ namespace Server.Mobiles
 						{
 							Banker.Deposit( m_InsuranceAward, 1800 );
 							PlayerMobile pm = (PlayerMobile)m_InsuranceAward;
-							pm.SendMessage( "You have been awarded an extra 1800 gold for vanquishing a murdered" ); 
+							pm.SendMessage( "You have been awarded an extra 1800 gold for vanquishing a murderer." ); 
 						}
 					}
 					else
