@@ -201,7 +201,7 @@ namespace Server.Misc
 
 			if ( skill.SkillName == SkillName.Focus && from is BaseCreature )
 				return;
-
+             
 			if ( skill.Base < skill.Cap && skill.Lock == SkillLock.Up )
 			{
 				int toGain = 1;
@@ -231,7 +231,20 @@ namespace Server.Misc
 				if ( from is PlayerMobile )
 					if (pm != null && skill.SkillName == pm.AcceleratedSkill && pm.AcceleratedStart > DateTime.Now)
 					toGain *= Utility.RandomMinMax(2, 5);
-					#endregion
+				#endregion
+
+
+                //Skill gain in dungeons mod
+                if (from.Region.IsPartOf(typeof(Regions.DungeonRegion)))
+                {
+
+                    toGain *= Utility.RandomMinMax(2, 5);
+                }
+
+                //end of skill gain in dungeons mod  
+
+
+
 
 				if ( !from.Player || (skills.Total + toGain) <= skills.Cap )
 				{
