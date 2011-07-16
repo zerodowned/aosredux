@@ -109,9 +109,7 @@ namespace Server.Items
 				cont.LockLevel = 0; // Can't be unlocked
 
 				cont.DropItem( new Gold( Utility.RandomMinMax( 50, 100 ) ) );
-
-				if ( Utility.RandomDouble() < 0.75 )
-					cont.DropItem( new TreasureMap( 0, Map.Trammel ) );
+				
 			}
 			else
 			{
@@ -133,7 +131,38 @@ namespace Server.Items
 				cont.MaxLockLevel = cont.RequiredSkill + 40;
 
 				cont.DropItem( new Gold( level * 3000 ) );
+			
 
+//Adding in a 10% chance for the same level map as your doing to spawn in the chest
+				
+				if ( 0.1 >= Utility.RandomDouble() && level == 1 )
+				{	
+					cont.DropItem( new TreasureMap( 1, Map.Felucca ) );
+				}
+				else if ( 0.1 >= Utility.RandomDouble() && level == 2 )
+				{
+					cont.DropItem( new TreasureMap( 2, Map.Felucca ) );
+				}
+				else if ( 0.1 >= Utility.RandomDouble() && level == 3 )
+				{
+					cont.DropItem( new TreasureMap( 3, Map.Felucca ) );
+				}
+				else if ( 0.1 >= Utility.RandomDouble() && level == 4 )
+				{
+					cont.DropItem( new TreasureMap( 4, Map.Felucca ) );
+				}
+				else if ( 0.1 >= Utility.RandomDouble() && level == 5 )
+				{
+					cont.DropItem( new TreasureMap( 5, Map.Felucca ) );
+				}
+				else if ( 0.1 >= Utility.RandomDouble() && level == 6 )
+				{
+					cont.DropItem( new TreasureMap( 6, Map.Felucca ) );
+				}
+				else
+				{
+				}
+//end of add
 				for ( int i = 0; i < level * 5; ++i )
 					cont.DropItem( Loot.RandomScroll( 0, 63, SpellbookType.Regular ) );
 
@@ -228,7 +257,7 @@ namespace Server.Items
 			for ( int i = 0; i < reagents; i++ )
 			{
 				Item item = Loot.RandomPossibleReagent();
-				item.Amount = Utility.RandomMinMax( 40, 60 );
+				item.Amount = Utility.RandomMinMax( 80, 100 );
 				cont.DropItem( item );
 			}
 
@@ -236,7 +265,7 @@ namespace Server.Items
 			if ( level == 0 )
 				gems = 2;
 			else
-				gems = level * 3;
+				gems = level * 5;
 
 			for ( int i = 0; i < gems; i++ )
 			{
