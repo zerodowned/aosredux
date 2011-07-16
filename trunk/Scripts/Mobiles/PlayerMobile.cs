@@ -1588,8 +1588,11 @@ namespace Server.Mobiles
 			}
 			else if ( item.Insured )
 			{
+			//  Updated to fix a bug where item.PayedInsurance was not being reset, and thus item became screwed up after the first insure/cancel.
 				item.Insured = false;
-
+				item.PayedInsurance = false;
+				Banker.Deposit( from, 600 );
+				SendMessage( "600 gold has been deposited into your bank box." );
 				SendLocalizedMessage( 1060874, "", 0x35 ); // You cancel the insurance on the item
 
 				BeginTarget( -1, false, TargetFlags.None, new TargetCallback( ToggleItemInsurance_Callback ) );
@@ -2144,11 +2147,11 @@ namespace Server.Mobiles
 					{
 						m_InsuranceCost += cost;
 						item.PayedInsurance = true;
-						SendLocalizedMessage(1060398, cost.ToString()); // ~1_AMOUNT~ gold has been 						withdrawn from your bank box.
+						SendLocalizedMessage(1060398, cost.ToString()); // ~1_AMOUNT~ gold has been withdrawn from your bank box.
 					}
 					else
 					{
-						SendLocalizedMessage( 1061079, "", 0x23 ); // You lack the funds to 						purchase the insurance
+						SendLocalizedMessage( 1061079, "", 0x23 ); // You lack the funds to purchase the insurance
 						item.PayedInsurance = false;
 						item.Insured = false;
 						m_NonAutoreinsuredItems++;
