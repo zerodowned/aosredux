@@ -212,7 +212,7 @@ namespace Server.Multis
 		[CommandProperty( AccessLevel.GameMaster )]
 		public virtual double BonusStorageScalar { get { return (Core.ML ? 1.2 : 1.0); } }
 
-		private bool m_Public;
+		private bool m_Public = true;
 
 		private HouseRegion m_Region;
 		private HouseSign m_Sign;
@@ -2700,7 +2700,8 @@ namespace Server.Multis
 			}
 			set
 			{
-				if ( m_Public != value )
+					//m_Public = true;
+					if ( m_Public != value )
 				{
 					m_Public = value;
 
