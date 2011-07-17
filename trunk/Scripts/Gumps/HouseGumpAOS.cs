@@ -338,18 +338,18 @@ namespace Server.Gumps
 						AddButtonLabeled( 10, 310, GetButtonID( 3, 8 ), 1011260 ); // View Ban List
 						AddButtonLabeled( 10, 330, GetButtonID( 3, 9 ), 1060698 ); // Clear Ban List
 
-						AddButtonLabeled( 210, 130, GetButtonID( 3, 12 ), 1060695, isOwner ); // Change to Private
+						//AddButtonLabeled( 210, 130, GetButtonID( 3, 12 ), 1060695, isOwner ); // Change to Private
 
-						AddHtmlLocalized( 245, 150, 240, 20, 1060694, SelectedColor, false, false ); // Change to Public
+						//AddHtmlLocalized( 245, 150, 240, 20, 1060694, SelectedColor, false, false ); // Change to Public
 					}
 					else
 					{
-						AddButtonLabeled( 10, 310, GetButtonID( 3, 10 ), 1060699 ); // View Access List
-						AddButtonLabeled( 10, 330, GetButtonID( 3, 11 ), 1060700 ); // Clear Access List
+						//AddButtonLabeled( 10, 310, GetButtonID( 3, 10 ), 1060699 ); // View Access List
+						//AddButtonLabeled( 10, 330, GetButtonID( 3, 11 ), 1060700 ); // Clear Access List
 
-						AddHtmlLocalized( 245, 130, 240, 20, 1060695, SelectedColor, false, false ); // Change to Private
+						//AddHtmlLocalized( 245, 130, 240, 20, 1060695, SelectedColor, false, false ); // Change to Private
 
-						AddButtonLabeled( 210, 150, GetButtonID( 3, 13 ), 1060694, isOwner ); // Change to Public
+						//AddButtonLabeled( 210, 150, GetButtonID( 3, 13 ), 1060694, isOwner ); // Change to Public
 					}
 
 					break;
