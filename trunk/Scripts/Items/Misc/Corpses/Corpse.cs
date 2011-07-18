@@ -972,87 +972,87 @@ namespace Server.Items
 			if ( from.AccessLevel > AccessLevel.Player || from.InRange( this.GetWorldLocation(), 2 ) )
 			{
 
-				#region Self Looting
-				bool selfLoot = ( checkSelfLoot && ( from == m_Owner ) );
-
-				if ( selfLoot )
-				{
-					List<Item> items = new List<Item>( this.Items );
-
-					bool gathered = false;
-					bool didntFit = false;
-
-					Container pack = from.Backpack;
-
-					bool checkRobe = true;
-
-					for ( int i = 0; !didntFit && i < items.Count; ++i )
-					{
-						Item item = items[i];
-						Point3D loc = item.Location;
-
-						if ( (item.Layer == Layer.Hair || item.Layer == Layer.FacialHair) || !item.Movable || !GetRestoreInfo( item, ref loc ) )
-							continue;
-
-						if ( checkRobe )
-						{
-							DeathRobe robe = from.FindItemOnLayer( Layer.OuterTorso ) as DeathRobe;
-
-							if ( robe != null )
-							{
-								if ( Core.SE )
-								{
-									robe.Delete();
-								}
-								else
-								{
-									Map map = from.Map;
-	
-									if ( map != null && map != Map.Internal )
-										robe.MoveToWorld( from.Location, map );
-								}
-							}
-						}
-
-						if ( m_EquipItems.Contains( item ) && from.EquipItem( item ) )
-						{
-							gathered = true;
-						}
-						else if ( pack != null && pack.CheckHold( from, item, false, true ) )
-						{
-							item.Location = loc;
-							pack.AddItem( item );
-							gathered = true;
-						}
-						else
-						{
-							didntFit = true;
-						}
-					}
-
-					if ( gathered && !didntFit )
-					{
-						SetFlag( CorpseFlag.Carved, true );
-
-						if ( ItemID == 0x2006 )
-						{
-							ProcessDelta();
-							SendRemovePacket();
-							ItemID = Utility.Random( 0xECA, 9 ); // bone graphic
-							Hue = 0;
-							ProcessDelta();
-						}
-
-						from.PlaySound( 0x3E3 );
-						from.SendLocalizedMessage( 1062471 ); // You quickly gather all of your belongings.
-						return;
-					}
-
-					if ( gathered && didntFit )
-						from.SendLocalizedMessage( 1062472 ); // You gather some of your belongings. The rest remain on the corpse.
-				}
-
-				#endregion
+//				#region Self Looting
+//				bool selfLoot = ( checkSelfLoot && ( from == m_Owner ) );
+//
+//				if ( selfLoot )
+//				{
+//					List<Item> items = new List<Item>( this.Items );
+//
+//					bool gathered = false;
+//					bool didntFit = false;
+//
+//					Container pack = from.Backpack;
+//
+//					bool checkRobe = true;
+//
+//					for ( int i = 0; !didntFit && i < items.Count; ++i )
+//					{
+//						Item item = items[i];
+//						Point3D loc = item.Location;
+//
+//						if ( (item.Layer == Layer.Hair || item.Layer == Layer.FacialHair) || !item.Movable || !GetRestoreInfo( item, ref loc ) )
+//							continue;
+//
+//						if ( checkRobe )
+//						{
+//							DeathRobe robe = from.FindItemOnLayer( Layer.OuterTorso ) as DeathRobe;
+//
+//							if ( robe != null )
+//							{
+//								if ( Core.SE )
+//								{
+//									robe.Delete();
+//								}
+//								else
+//								{
+//									Map map = from.Map;
+//	
+//									if ( map != null && map != Map.Internal )
+//										robe.MoveToWorld( from.Location, map );
+//								}
+//							}
+//						}
+//
+//						if ( m_EquipItems.Contains( item ) && from.EquipItem( item ) )
+//						{
+//							gathered = true;
+//						}
+//						else if ( pack != null && pack.CheckHold( from, item, false, true ) )
+//						{
+//							item.Location = loc;
+//							pack.AddItem( item );
+//							gathered = true;
+//						}
+//						else
+//						{
+//							didntFit = true;
+//						}
+//					}
+//
+//					if ( gathered && !didntFit )
+//					{
+//						SetFlag( CorpseFlag.Carved, true );
+//
+//						if ( ItemID == 0x2006 )
+//						{
+//							ProcessDelta();
+//							SendRemovePacket();
+//							ItemID = Utility.Random( 0xECA, 9 ); // bone graphic
+//							Hue = 0;
+//							ProcessDelta();
+//						}
+//
+//						from.PlaySound( 0x3E3 );
+//						from.SendLocalizedMessage( 1062471 ); // You quickly gather all of your belongings.
+//						return;
+//					}
+//
+//					if ( gathered && didntFit )
+//						from.SendLocalizedMessage( 1062472 ); // You gather some of your belongings. The rest remain on the corpse.
+//				}
+//
+//				#endregion
 
 				if ( !CheckLoot( from, null ) )
 					return;
