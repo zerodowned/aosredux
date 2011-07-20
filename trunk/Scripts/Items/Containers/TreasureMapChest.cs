@@ -74,18 +74,18 @@ namespace Server.Items
 
 			if ( rnd < 1 )
 			{
-				attributeCount = Utility.RandomMinMax( 3, 6 );
+				attributeCount = Utility.RandomMinMax( 4, 6 );
 				min = 50; max = 70;
 			}
 			else if ( rnd < 3 )
 			{
-				attributeCount = Utility.RandomMinMax( 2, 5 );
-				min = 30; max = 50;
+				attributeCount = Utility.RandomMinMax( 3, 5 );
+				min = 40; max = 60;
 			}
 			else if ( rnd < 6 )
 			{
 				attributeCount = Utility.RandomMinMax( 2, 4 );
-				min = 20; max = 40;
+				min = 30; max = 50;
 			}
 			else if ( rnd < 10 )
 			{
@@ -95,7 +95,7 @@ namespace Server.Items
 			else
 			{
 				attributeCount = 1;
-				min = 15; max = 20;
+				min = 15; max = 30;
 			}
 		}
 
@@ -179,21 +179,21 @@ namespace Server.Items
 					{
 						BaseWeapon weapon = (BaseWeapon)item;
 
-						if ( Core.AOS )
-						{
+//						if ( Core.AOS )
+//						{
 							int attributeCount;
 							int min, max;
 
 							GetRandomAOSStats( out attributeCount, out min, out max );
 
 							BaseRunicTool.ApplyAttributesTo( weapon, attributeCount, min, max );
-						}
-						else
-						{
-							weapon.DamageLevel = (WeaponDamageLevel)Utility.Random( 6 );
-							weapon.AccuracyLevel = (WeaponAccuracyLevel)Utility.Random( 6 );
-							weapon.DurabilityLevel = (WeaponDurabilityLevel)Utility.Random( 6 );
-						}
+//						}
+//						else
+//						{
+//							weapon.DamageLevel = (WeaponDamageLevel)Utility.Random( 6 );
+//							weapon.AccuracyLevel = (WeaponAccuracyLevel)Utility.Random( 6 );
+//							weapon.DurabilityLevel = (WeaponDurabilityLevel)Utility.Random( 6 );
+//						}
 
 						cont.DropItem( item );
 					}
@@ -201,20 +201,20 @@ namespace Server.Items
 					{
 						BaseArmor armor = (BaseArmor)item;
 
-						if ( Core.AOS )
-						{
+//						if ( Core.AOS )
+//						{
 							int attributeCount;
 							int min, max;
 
 							GetRandomAOSStats( out attributeCount, out min, out max );
 
 							BaseRunicTool.ApplyAttributesTo( armor, attributeCount, min, max );
-						}
-						else
-						{
-							armor.ProtectionLevel = (ArmorProtectionLevel)Utility.Random( 6 );
-							armor.Durability = (ArmorDurabilityLevel)Utility.Random( 6 );
-						}
+//						}
+//						else
+//						{
+//							armor.ProtectionLevel = (ArmorProtectionLevel)Utility.Random( 6 );
+//							armor.Durability = (ArmorDurabilityLevel)Utility.Random( 6 );
+//						}
 
 						cont.DropItem( item );
 					}
